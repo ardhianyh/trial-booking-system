@@ -4,11 +4,15 @@ import pg from 'pg';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
-try {
-   process.loadEnvFile();
-} catch {
-   /* no local .env file */
-}
+const loadDotEnv = () => {
+   try {
+      process.loadEnvFile();
+   } catch {
+      return;
+   }
+};
+
+loadDotEnv();
 
 export const SCHEMA = process.env.DATABASE_SCHEMA || 'application';
 export const MIGRATIONS_DIR = path.join(here, 'migrations');
