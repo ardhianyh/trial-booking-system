@@ -19,7 +19,8 @@ const { database, clock, deps } = context;
 
 const LAST_SEAT_CLASS = IDS.classes.upperScience;
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const wait = (ms: number): Promise<void> =>
+   new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 const holdLastSeat = async (parentId: string, studentId: string) =>
    expectOk(await createBooking(deps, { parentId, studentId, trialClassId: LAST_SEAT_CLASS })).booking;
