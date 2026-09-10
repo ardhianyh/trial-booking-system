@@ -1,0 +1,288 @@
+:root {
+   --ink: #1b2a41;
+   --ink-soft: #5a6b80;
+   --surface: #f3f6f4;
+   --card: #ffffff;
+   --line: #d9e0dc;
+   --confirmed: #2f6b5a;
+   --hold: #e0a526;
+   --error: #b3412e;
+   --focus: #1b2a41;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+body {
+   margin: 0;
+   background: var(--surface);
+   color: var(--ink);
+   font-family: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+   font-size: 16px;
+   line-height: 1.5;
+}
+
+.page {
+   max-width: 880px;
+   margin: 0 auto;
+   padding: 24px 16px 64px;
+}
+
+.masthead {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 12px;
+   align-items: baseline;
+   justify-content: space-between;
+   border-bottom: 2px solid var(--ink);
+   padding-bottom: 12px;
+}
+
+.masthead h1 {
+   font-size: 20px;
+   margin: 0;
+}
+
+.tabs {
+   display: flex;
+   gap: 8px;
+   margin: 16px 0 24px;
+}
+
+.tab {
+   border: 1px solid var(--line);
+   background: var(--card);
+   color: var(--ink-soft);
+   padding: 8px 14px;
+   border-radius: 999px;
+   cursor: pointer;
+   font: inherit;
+}
+
+.tab[aria-pressed='true'] {
+   background: var(--ink);
+   border-color: var(--ink);
+   color: #fff;
+}
+
+.field {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+   align-items: center;
+}
+
+label {
+   color: var(--ink-soft);
+   font-size: 14px;
+}
+
+select,
+button {
+   font: inherit;
+}
+
+select {
+   padding: 6px 10px;
+   border: 1px solid var(--line);
+   border-radius: 6px;
+   background: var(--card);
+   color: var(--ink);
+}
+
+:focus-visible {
+   outline: 3px solid var(--focus);
+   outline-offset: 2px;
+}
+
+.children {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+   margin: 12px 0 24px;
+}
+
+.child {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+   border: 1px solid var(--line);
+   background: var(--card);
+   border-radius: 8px;
+   padding: 8px 12px;
+   cursor: pointer;
+}
+
+.child[aria-pressed='true'] {
+   border-color: var(--ink);
+   box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.rows {
+   display: flex;
+   flex-direction: column;
+   border-top: 1px solid var(--line);
+}
+
+.row {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 12px;
+   align-items: center;
+   justify-content: space-between;
+   padding: 14px 0;
+   border-bottom: 1px solid var(--line);
+}
+
+.row-main {
+   display: flex;
+   flex-direction: column;
+   gap: 2px;
+   min-width: 220px;
+}
+
+.row-title {
+   font-weight: 700;
+}
+
+.row-meta {
+   color: var(--ink-soft);
+   font-size: 14px;
+}
+
+.row-actions {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+}
+
+.seats {
+   display: flex;
+   gap: 4px;
+}
+
+.seat {
+   width: 12px;
+   height: 12px;
+   border-radius: 50%;
+   border: 1.5px solid var(--line);
+   background: var(--card);
+}
+
+.seat.confirmed {
+   background: var(--confirmed);
+   border-color: var(--confirmed);
+}
+
+.seat.held {
+   background: repeating-linear-gradient(45deg, var(--hold), var(--hold) 2px, #fff 2px, #fff 4px);
+   border-color: var(--hold);
+}
+
+.seat-label {
+   font-size: 14px;
+   color: var(--ink-soft);
+   min-width: 74px;
+   text-align: right;
+}
+
+button.primary {
+   background: var(--ink);
+   color: #fff;
+   border: 1px solid var(--ink);
+   border-radius: 6px;
+   padding: 8px 14px;
+   cursor: pointer;
+}
+
+button.secondary {
+   background: var(--card);
+   color: var(--ink);
+   border: 1px solid var(--line);
+   border-radius: 6px;
+   padding: 8px 14px;
+   cursor: pointer;
+}
+
+button:disabled {
+   opacity: 0.45;
+   cursor: not-allowed;
+}
+
+.panel {
+   background: var(--card);
+   border: 1px solid var(--line);
+   border-radius: 10px;
+   padding: 20px;
+   margin-bottom: 24px;
+}
+
+.panel h2 {
+   margin: 0 0 4px;
+   font-size: 18px;
+}
+
+.panel-actions {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+   margin-top: 16px;
+}
+
+.status {
+   border-left: 4px solid var(--line);
+   padding-left: 12px;
+   margin: 12px 0;
+}
+
+.status.confirmed {
+   border-color: var(--confirmed);
+}
+
+.status.pending_payment {
+   border-color: var(--hold);
+}
+
+.status.payment_failed,
+.status.refund_required {
+   border-color: var(--error);
+}
+
+.notice {
+   background: #fdece8;
+   border: 1px solid var(--error);
+   color: var(--error);
+   border-radius: 8px;
+   padding: 10px 14px;
+   margin-bottom: 16px;
+}
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   font-size: 15px;
+}
+
+th,
+td {
+   text-align: left;
+   padding: 8px 12px 8px 0;
+   border-bottom: 1px solid var(--line);
+}
+
+th {
+   color: var(--ink-soft);
+   font-size: 13px;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+}
+
+.muted {
+   color: var(--ink-soft);
+}
+
+.tag {
+   font-size: 13px;
+   color: var(--ink-soft);
+}

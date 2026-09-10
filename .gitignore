@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+.DS_Store
+docs/MASTER_PLAN.md
+coverage/
+*.log

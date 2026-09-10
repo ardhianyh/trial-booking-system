@@ -1,0 +1,23 @@
+{
+  "name": "ottodot-trial-booking",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "start": "docker compose up --build",
+    "stop": "docker compose down",
+    "reset": "docker compose down -v && docker compose up --build",
+    "test": "docker compose exec api npm test",
+    "typecheck": "npm run typecheck -w server && npm run typecheck -w web",
+    "migrate": "docker compose exec api node database/migrate.js",
+    "migrate:status": "docker compose exec api node database/migrate.js status",
+    "db:fresh": "docker compose exec api node database/fresh.js --yes",
+    "demo:last-seat": "docker compose exec api npm run demo:last-seat"
+  },
+  "engines": {
+    "node": ">=20.12"
+  }
+}

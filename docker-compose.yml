@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ottodot-db
+    environment:
+      POSTGRES_USER: ottodot
+      POSTGRES_PASSWORD: ottodot
+      POSTGRES_DB: ottodot
+      TZ: Asia/Singapore
+      PGTZ: Asia/Singapore
+    ports:
+      - "127.0.0.1:5435:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ottodot -d ottodot"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  api:
+    build: ./server
+    container_name: ottodot-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: ottodot
+      DATABASE_PASSWORD: ottodot
+      DATABASE_DB: ottodot
+      DATABASE_SCHEMA: application
+      TEST_DATABASE_DB: ottodot_test
+      PORT: 3001
+      HOLD_SECONDS: 600
+      TRIAL_PRICE_CENTS: 5000
+      MOCK_PAYMENT_DELAY_MS: 0
+      TZ: Asia/Singapore
+    command: sh -c "node database/migrate.js deploy --yes && npm run dev"
+    ports:
+      - "127.0.0.1:3001:3001"
+    volumes:
+      - ./server/src:/app/src
+      - ./server/test:/app/test
+      - ./server/database:/app/database
+
+  web:
+    build: ./web
+    container_name: ottodot-web
+    depends_on:
+      - api
+    environment:
+      VITE_API_PROXY_TARGET: http://api:3001
+    ports:
+      - "127.0.0.1:5173:5173"
+    volumes:
+      - ./web/src:/app/src
+      - ./web/index.html:/app/index.html
+
+volumes:
+  db-data:
