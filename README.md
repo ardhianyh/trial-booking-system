@@ -12,7 +12,7 @@ easy for you to check.
 The only prerequisite is **Docker**. No Node install, no `npm install`, no local Postgres.
 
 ```bash
-git clone <this-repo> && cd ottodot-trial-booking
+git clone https://github.com/ardhianyh/trial-booking-system.git && cd trial-booking-system
 docker compose up --build
 ```
 

@@ -54,7 +54,7 @@ I overruled it and asked for the full `routers → controllers → services → 
 ### 3. Smaller corrections
 
 - The plan hardcoded Postgres on host port 5433. That port was already taken on my machine, so the stack failed to start on the very first `docker compose up`. Moved to 5435 and propagated through compose, `.env.example`, the config default and the docs.
-- The plan called for the race tests to be written first, red, before the services. That is not what happened — the services were written first. Rather than claim the order I did not follow, I got the same guarantee from the mutation checks, and `NOTES.md` records the deviation.
+- The plan called for the race tests to be written first, red, before the services. That is not what happened — the services were written first. Rather than claim the order I did not follow, I got the same guarantee from the mutation checks, and the deviation is recorded here.
 
 ## What I would change about the workflow
 
